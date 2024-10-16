@@ -149,7 +149,7 @@ for _ in 0..n {
 ### Memory Management in  Rust:
 - In rust if make any mistake while writing code for memory management(like dangling pointers/memory issue), the code won't compile
 
-![image](./Memory Management.png "Memory Management")
+![image](./MemoryManagement.png "Memory Management")
 
 Whenever a program is written in any language, it `allocates` and `deallocates` the memory on the ram.
 
