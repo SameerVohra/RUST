@@ -41,4 +41,26 @@ fn main(){
 
     //We can do this but not recomended because there can be an overflow and error will be shown
     println!("{}", char1.unwrap());
+
+    let sentence: String = String::from("Hello this is a sentence");
+    let first_word: String = first_word(sentence);
+    println!("The first word of the given sentence is: {}", first_word);
+
+    let n: i32 = 200;
+    for _i in 0..n{ // We are using this _ here is because we are not using i anywhere and to avoid
+                    // getting any kind of warning we use _
+        print!("Hello, World! ");
+    }
+}
+
+// Defining a function with a return type in rust, return type can be anything
+fn first_word(sentence: String) -> String{
+    let mut ans: String = String::new();
+    for char in sentence.chars(){
+        ans.push_str(char.to_string().as_str());
+        if char == ' '{
+            break;
+        }
+    }
+    return ans;
 }
