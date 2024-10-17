@@ -175,3 +175,48 @@ as the runLoop function runs a new array `x` is created in the memory(Ram) and w
 
 Memory management in Rust is one the most significant aspect of Rust, it is designed to ensure safety and efficiency without the need of any `garbage collector`.
 - Not having a `garbage collector` make Rust fast.
+
+### Mutability
+Variables whose values can't be changed after assigning are called `immutable`, whereas the value of a `mutable` variable can be changed.
+
+By default variables are `immutable` in rust because 
+  - Knowing that a certain data will not change will allow the compiler to optimize better code.
+  - Immutable data is inherently thread-safe because if no thread can alter the data, then no synchronization is needed when the data is accessed concurrently.
+  
+
+```rust
+fn main(){
+  let x = 10;
+  
+  for i in 0..100{
+    x+=i;
+  }
+  print("{}", x);
+}
+```
+
+- This will give error as `x` is `immutable`
+
+```rust
+fn main(){
+  let mut x = 10;
+  for i in 0..10{
+    x+=i;
+  }
+  print!("{}", x);
+}
+```
+
+- This will work totally fine
+
+```
+💡 Concept of Mutability and Immutability is not as same as it is in JS for const.
+While using const one can update the values of an array or an object.
+```
+
+### Stack VS Heap
+
+- Stack: Fast allocation and deallocation. Rust uses Stack memory for most primitive data types and for data whose size is known at the runtime (eg: numbers, boolean).
+- Heap: Used for data that can grow on runtime (eg: vectors, strings);
+
+

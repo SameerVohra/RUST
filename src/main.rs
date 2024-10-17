@@ -46,10 +46,10 @@ fn main(){
     let first_word: String = first_word(sentence);
     println!("The first word of the given sentence is: {}", first_word);
 
-    let n: i32 = 200;
-    for _i in 0..n{ // We are using this _ here is because we are not using i anywhere and to avoid
+    let n: i128 = 1;
+    for i in 0..n{ // We are using this _ here is because we are not using i anywhere and to avoid
                     // getting any kind of warning we use _
-        print!("Hello, World! ");
+        println!("Hello, World! {}", i);
     }
 }
 
