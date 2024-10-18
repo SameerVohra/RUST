@@ -239,9 +239,9 @@ let s2: String = s1;
 print!("{}", s1) //This will generate error because the ownership has been moved from s1 to s2;
 ```
 
-[!image](./HeapVariables.png "Heap variables")
+![image](./HeapVariables.png "Heap variables")
 ###### Whenever confused look for Harkirat's Girlfriend example.
-[!image](./GirlfriendExample.png "Example")
+![image](./GirlfriendExample.png "Example")
 
 - Whenever the current owner of the data dies the memory gets cleared up.
 
