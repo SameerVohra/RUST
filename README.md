@@ -94,7 +94,7 @@ match char1 {
 
 ---
 
-### Handling Optional Values:
+## Handling Optional Values:
 Rust uses the `Option` type to handle values that may or may not exist.
 
 #### Example:
@@ -112,7 +112,7 @@ println!("{}", char1.unwrap()); // Unsafe, can panic if `None`
 
 ---
 
-### Functions with Return Types:
+## Functions with Return Types:
 Functions in Rust can return values of any type. 
 
 #### Example:
@@ -146,7 +146,7 @@ for _ in 0..n {
 
 
 ```
-### Memory Management in  Rust:
+## Memory Management in  Rust:
 - In rust if make any mistake while writing code for memory management(like dangling pointers/memory issue), the code won't compile
 
 ![image](./MemoryManagement.png "Memory Management")
@@ -176,7 +176,7 @@ as the runLoop function runs a new array `x` is created in the memory(Ram) and w
 Memory management in Rust is one the most significant aspect of Rust, it is designed to ensure safety and efficiency without the need of any `garbage collector`.
 - Not having a `garbage collector` make Rust fast.
 
-### Mutability
+## Mutability
 Variables whose values can't be changed after assigning are called `immutable`, whereas the value of a `mutable` variable can be changed.
 
 By default variables are `immutable` in rust because 
@@ -214,9 +214,55 @@ fn main(){
 While using const one can update the values of an array or an object.
 ```
 
-### Stack VS Heap
+## Stack VS Heap
 
 - Stack: Fast allocation and deallocation. Rust uses Stack memory for most primitive data types and for data whose size is known at the runtime (eg: numbers, boolean).
 - Heap: Used for data that can grow on runtime (eg: vectors, strings);
 
 
+## Ownership
+Every piece of data in Rust has a single owner and when that owner goes out of scope Rust automatically deallocates the memory provided to that piece of data. It helps in
+preventing `Memory Leaks`;
+
+### What is Ownership?
+Ownership is a set of rules that governs how a Rust program manages memory. In Rust memory is managed through a system of ownership with a set of rules that a compiler checks. If any of the rules are violated the program won't even compile. The features of Ownership won't slow down your program while it's running.
+
+#### Stack Variables
+Ownership is more relevant in Heap Variables, because in Stack Variables primitive data types pass on a copy, rather than moving the variables.
+
+#### Heap Variables
+Heap variables always want to have a `single` owner, and if their owner goes out of the scope, the get `deallocated`.
+
+```rust
+let s1: String = String::from("hello");
+let s2: String = s1;
+print!("{}", s1) //This will generate error because the ownership has been moved from s1 to s2;
+```
+
+[!image](./HeapVariables.png "Heap variables")
+###### Whenever confused look for Harkirat's Girlfriend example.
+[!image](./GirlfriendExample.png "Example")
+
+- Whenever the current owner of the data dies the memory gets cleared up.
+
+- This help s in preventing problems like `Dangling pointer` and `Double free errors`.
+
+This makes `Rust` extremely memory safe
+
+#### In Short: 
+- Anything on the heap will have an owner and it will always have a single owner at a given point of time.
+
+### Cloning a String
+We use `.clone()` to clone a variable. So while using `.clone()` we are not letting the other party take over the ownership of the variable, instead we are just making a variable that is the clone of the first one and the other party will point to it.
+
+```rust
+fn main(){
+  let s1: String = String::from("hello world");
+  take_ownership(s1.clone());
+  print!("{}", s1) // This would have given error if we have not used clone
+}
+
+fn take_ownership(new_str){
+  print!("{}", new_str);
+}
+```

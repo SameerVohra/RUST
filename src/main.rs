@@ -51,6 +51,19 @@ fn main(){
                     // getting any kind of warning we use _
         println!("Hello, World! {}", i);
     }
+
+    //OWNERSHIP
+    
+    let s1: String = String::from("hello");
+    let s2: String = s1;
+
+    // print!("{}", s1); // This will generate error because the ownership has been moved
+    
+    println!("{}", s2);
+
+    let my_string: String = String::from("Hi there");
+    take_ownership(my_string.clone());
+    println!("My String: {}", my_string);
 }
 
 // Defining a function with a return type in rust, return type can be anything
@@ -63,4 +76,8 @@ fn first_word(sentence: String) -> String{
         }
     }
     return ans;
+}
+
+fn take_ownership(new_str: String){
+    println!("New String: {}", new_str)
 }
