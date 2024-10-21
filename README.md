@@ -266,3 +266,87 @@ fn take_ownership(new_str){
   print!("{}", new_str);
 }
 ```
+
+## Borrowing And References
+
+![image](./BorrowingAndReferenceRihanaExample.png "borrowing and reference real life example")
+
+### Borrowing 
+Borrowing means allowing different functions to have the access to the variable without passing the ownership of that variable.
+
+You can transfer ownership of variables to functions and. By passing a reference of the string to the function. While the ownership of the variable remains with the original variable.
+
+- The main feature of borrowing is that is the borrower dies then the variable will not die.
+
+```rust
+fn main(){
+  let s1: String = String::from("This is a new string");
+  borrowing(&s1);
+  println!("{}", s1);
+}
+
+fn borrowing(my_str: &String){
+  println!("{}", my_str);
+}
+```
+
+- The `ownership` of string `s1` will not be passed to the borrowing function, because we have passed the string `s1` by `reference`. 
+
+![image](./Borrowing.png "borrowing")
+
+
+### References
+References means giving the address of a string rather than giving the ownership of the string to the other function
+```rust
+fn main(){
+  let s1: String = String::from("hello");
+  let s2 = &s1;
+  println!("{}", s2); 
+  println!("{}", s1); // This will totally work fine because we gave the address of s1 to s2 not the ownership
+
+}
+```
+ 
+![image](./ReferenceExample.png "Reference Example")
+
+### Mutable Reference
+What is you want to `update` the value of the variable.
+
+```rust
+fn main(){
+  let mut s1: String = String::from("Hello ");
+  update_word(&mut s1);
+  print!("{}", s1);
+}
+
+fn update_word(s: &mut String){
+  s.push_str(" World");
+}
+```
+
+The function `update_word` will borrow the string `s1` with a `mutable reference` and can update the string. It will work fine.
+
+```rust
+fn main(){
+  let mut s1: String = String::from("Hello ");
+  let s2: &mut String = &mut s1;
+  update_word(&mut s1);
+  print!("{}", s1);
+  print!("{}", s2);
+}
+
+fn update_word(s: &mut String){
+  s.push_str(" World");
+}
+```
+
+This will give `error` because string `s2` has already `borrowed` `s1` with a `mutable reference` and until it is finished `s1` can't be passed to `update_word` function with a `mutable reference`.
+
+Note:
+- We can have a `single mutable reference` at a given point of time and no other `borrowers` also even as `immutable`.
+
+Rules for Borrowing
+- There can be many `immutable references` at the same time.
+- There can be only one `mutable reference` at a given time.
+- If there is a `mutable reference` you can not have another `immutable reference` either.
+

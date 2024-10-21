@@ -64,6 +64,25 @@ fn main(){
     let my_string: String = String::from("Hi there");
     take_ownership(my_string.clone());
     println!("My String: {}", my_string);
+
+
+    // BORROWING AND REFERENCES
+    
+    let s1: String = String::from("hello this is sameer");
+    let s2: &String = &s1;
+    println!("s2: {}", s2);
+    println!("s1: {}", s1);
+
+    let new_str: String = String::from("Hello this is my new string");
+    borrowing(&new_str);
+    println!("After borrowing completed: {}", new_str);
+
+
+    // Mutable References
+    
+    let mut mut_s1: String = String::from("Hello");
+    update_word(&mut mut_s1);
+    println!("{}", mut_s1);
 }
 
 // Defining a function with a return type in rust, return type can be anything
@@ -80,4 +99,12 @@ fn first_word(sentence: String) -> String{
 
 fn take_ownership(new_str: String){
     println!("New String: {}", new_str)
+}
+
+fn borrowing(my_string: &String){
+    println!("Borrowed String: {}", my_string);
+}
+
+fn update_word(s: &mut String){
+    s.push_str(" World!");
 }
