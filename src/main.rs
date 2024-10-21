@@ -1,3 +1,27 @@
+struct User{
+    name: String,
+    age: i32,
+    active: bool
+}
+
+// Implementing Structs
+
+struct Rect{
+    height: u32, 
+    width: u32
+}
+
+impl Rect{
+    fn area(&self) -> u32{
+        self.height*self.width // If there is no ; in the last then it automatically returns the
+                               // statement no need to write return keyword.
+    }
+
+    fn peri(&self) -> u32{
+        2*(self.width+self.height)
+    }
+}
+
 fn main(){
     // integers
     let x: i8 = -23;
@@ -83,6 +107,27 @@ fn main(){
     let mut mut_s1: String = String::from("Hello");
     update_word(&mut mut_s1);
     println!("{}", mut_s1);
+
+
+    // Structs
+    
+    println!("\nUsing Structs");
+
+    let user = User{
+        name: String::from("Sameer"),
+        age: 20,
+        active: false
+    };
+
+    println!("User name: {}\nUser age: {}\nIs active: {}", user.name, user.age, user.active);
+
+    let rect = Rect{
+        height: 12,
+        width: 10
+    };
+
+    println!("Area of the rectangle with height: {} and width: {} is {}", rect.height, rect.width, rect.area());
+    println!("Perimeter of the rectangle with height: {} and width: {} is {}", rect.height, rect.width, rect.peri());
 }
 
 // Defining a function with a return type in rust, return type can be anything

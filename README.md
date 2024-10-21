@@ -350,3 +350,26 @@ Rules for Borrowing
 - There can be only one `mutable reference` at a given time.
 - If there is a `mutable reference` you can not have another `immutable reference` either.
 
+## Structs
+Structs lets you structure the data together. Similar to `objects` in javascript.
+
+```rust
+struct User{
+  name: String,
+  age: i32,
+  is_active: bool
+}
+
+fn main(){
+  let user = User{
+    name: String::from("Sameer"),
+    age: 20,
+    is_active: false
+  };
+  println!("{} is {} years old", user.name, user.age);
+}
+```
+
+### Data Storage of Structs in Stack And Heap
+![image](./DataStorageStructs.png "Data Storage in structs")
+
