@@ -1,3 +1,5 @@
+use std::fs;
+
 struct User{
     name: String,
     age: i32,
@@ -9,6 +11,22 @@ struct User{
 struct Rect{
     height: u32, 
     width: u32
+}
+
+// Implementing Enums
+
+enum Direction{
+    North,
+    East,
+    West,
+    South
+}
+
+// Enums with values
+enum Shape{
+    Circle(f64),
+    Square(f64),
+    Rectangle(f64, f64)
 }
 
 impl Rect{
@@ -126,8 +144,43 @@ fn main(){
         width: 10
     };
 
-    println!("Area of the rectangle with height: {} and width: {} is {}", rect.height, rect.width, rect.area());
+    println!("\nArea of the rectangle with height: {} and width: {} is {}", rect.height, rect.width, rect.area());
     println!("Perimeter of the rectangle with height: {} and width: {} is {}", rect.height, rect.width, rect.peri());
+
+
+    // Enums
+
+    let my_direction: Direction = Direction::North;
+    move_around(my_direction);
+
+    // Enums with values
+
+    let circle: Shape = Shape::Circle(6.0);
+    let square: Shape = Shape::Square(13.9);
+    let rectangle: Shape = Shape::Rectangle(29.0, 12.9);
+
+    let area: f64 = calculate_area(circle);
+    println!("\nArea {}", area);
+
+    let res = fs::read_to_string("example.txt");
+    match res{
+        Ok(content) => println!("Content of the file are: {}", content),
+        Err(err) => println!("Error reading file: {}", err)
+    }
+
+    let str_option: String = String::from("Smeer");
+    let res = find_first_a(str_option.clone());
+    let res2 = find_first_a_result(str_option);
+
+    match res{
+        Some(index) => println!("'a' is present at index: {}", index),
+        None => println!("'a' is not present in the give string"),
+    }
+
+    match res2 {
+        Ok(index) => println!("'a' is present at index: {}", index),
+        Err(error) => println!("{}", error)
+    }
 }
 
 // Defining a function with a return type in rust, return type can be anything
@@ -152,4 +205,40 @@ fn borrowing(my_string: &String){
 
 fn update_word(s: &mut String){
     s.push_str(" World!");
+}
+
+fn move_around(direction: Direction){
+    println!("\n");
+    match direction {
+        Direction::North=>println!("Moving North"),
+        Direction::East=>println!("Moving East"),
+        Direction::West=>println!("Moving West"),
+        Direction::South=>println!("Moving South")
+    }
+}
+
+fn calculate_area(shape:Shape) -> f64{
+    match shape{
+        Shape::Circle(radius) => std::f64::consts::PI*radius*radius,
+        Shape::Square(side_len) => side_len*side_len,
+        Shape::Rectangle(height, width) => height*width
+    }
+}
+
+fn find_first_a(str: String) -> Option<i32>{
+    for(index, chars) in str.chars().enumerate(){
+        if chars=='a'{
+            return Some(index as i32);
+        }
+    }
+    return None;
+}
+
+fn find_first_a_result(str: String) -> Result<i32, String>{
+    for(index, chars) in str.chars().enumerate(){
+        if chars=='a'{
+            return Ok(index as i32);
+        }
+    }
+    return Err("'a' is not present in the given string".to_string());
 }

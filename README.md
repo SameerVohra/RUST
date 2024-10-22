@@ -373,3 +373,137 @@ fn main(){
 ### Data Storage of Structs in Stack And Heap
 ![image](./DataStorageStructs.png "Data Storage in structs")
 
+## Enums
+
+Enums in rust are similar to Enums in typescript.
+
+```rust
+enum Direction{
+  North, 
+  East,
+  West,
+  South
+}
+
+fn main(){
+  let my_direction:Direction = Direction::North;
+  move_around(my_direction);
+}
+
+fn move_around(direction: Direction){
+  // Write some logic 
+}
+```
+
+### Why Enums?
+Enums allow you to define types with multiple possible variants, enabling safer and more expressive code.
+
+### Enums with Values
+```rust
+enum Shape{
+  Circle(f64),
+  Square(f64),
+  Rectangle(f64, f64)
+}
+
+fn main(){
+  let circle: Shape = Shape::Circle(12.0);
+  let square: Shape = Shape::Square(10.0);
+  let rectangle: Shape = Shape::Rectangle(10.23, 20.6);
+
+  calculate_area(circle);
+}
+
+fn calculate_area(shape: Shape)->f64{
+  // Logic to calculate area of the defined shape
+}
+```
+
+### Pattern Matching in Enums
+
+```rust
+fn calculate_area(shape: Shape)->f64{
+  match shape{
+    Shape::Circle(radius) => std::f64::consts::PI*radius*radius,
+    Shape::Square(side_len) => side_len*side_len,
+    Shape::Rectangle(height, width) => height*width
+  }
+}
+```
+
+## Error Handling
+Different languages have different ways to handle error. For ex. javascript uses `try catch` block to handle errors. But rust has a different approach to handle errors.
+
+- try catch block in JS
+
+```javascript
+try{
+  const data = fs.readFileSync("example.txt", "utf8");
+  console.log(data);
+}
+catch(error){
+  console.log(`Error reading file: ${error}`);
+}
+```
+
+We used `try catch` block here because reading a file is unpredictable, because there are chances that the file does not exist.
+
+
+- In Rust
+```rust
+let res = fs::read_to_string("example.txt");
+match res{
+  Ok(content) => println!("Contents of the file are: {}", content),
+  Err(err) => println!("Error reading file: {}", err)
+}
+```
+
+## Option Enum
+
+The concept of `Option Enum` was introduced in rust to handle the concept of `nullability` in a safe and expressive way.
+
+- Example
+
+```rust
+fn main(){
+  let str: String = String::from("Sameer");
+  let res = find_first_a(str);
+  match res{
+    Some(index)=>println!("First 'a' is present at index: {}", index),
+    None => println!("'a' os not present in the given string")
+  }
+
+  let res2 = find_first_a_result(str);
+  match res{
+    Ok(index) => println!("'a' is present at index: {}", index),
+    Err(error) => println!("{}", error)
+  }
+}
+
+fn find_first_a(str: String) -> Option<i32>{
+  for (index, char) in str.chars().enumerate(){
+    if(char=='a'){
+      return Some(index as i32);
+    }
+  }
+  return None;
+}
+
+// We can use 'result' also instead of Option
+
+fn find_first_a_result(str: String) -> Result<i32, String>{
+  for(index, char) in str.chars().enumerate(){
+    if(char=='a'){
+      return Ok(index as i32);
+    }
+  }
+  return Err("'a' is not present".to_string);
+}
+```
+
+## Cargo, Packages, and External Deps
+Just like nodejs has `npm`, the rust ecosystem has `cargo`.
+
+Cargo is a `package manager` in rust, which means we can use it to bring packages(crates in case of rust) to our project.
+
+
