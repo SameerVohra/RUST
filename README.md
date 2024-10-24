@@ -227,6 +227,11 @@ preventing `Memory Leaks`;
 ### What is Ownership?
 Ownership is a set of rules that governs how a Rust program manages memory. In Rust memory is managed through a system of ownership with a set of rules that a compiler checks. If any of the rules are violated the program won't even compile. The features of Ownership won't slow down your program while it's running.
 
+### Ownership Rules
+- Each value in Rust has a `owner`.
+- There can only be one `owner` at a time.
+- When the `owner` goes out of scope, the value will be dropped.
+
 #### Stack Variables
 Ownership is more relevant in Heap Variables, because in Stack Variables primitive data types pass on a copy, rather than moving the variables.
 
@@ -510,4 +515,5 @@ Just like nodejs has `npm`, the rust ecosystem has `cargo`.
 
 Cargo is a `package manager` in rust, which means we can use it to bring packages(crates in case of rust) to our project.
 
-
+- You can add external `crates` into your code using `cargo add crate_name`.
+- Crates are like `npm packages`

@@ -1,4 +1,5 @@
 use std::fs;
+use chrono::{Local, Utc};
 
 struct User{
     name: String,
@@ -181,6 +182,11 @@ fn main(){
         Ok(index) => println!("'a' is present at index: {}", index),
         Err(error) => println!("{}", error)
     }
+
+    println!("The UTC time is: {}", Utc::now());
+    println!("Formatted UTC time is: {}", Utc::now().format("%y-%m-%d %H:%M:%S"));
+    println!("Current Local time is: {}", Local::now());
+    println!("Current Formatted Local time is: {}", Local::now().format("%y/%m/%d %H:%M:%S"));
 }
 
 // Defining a function with a return type in rust, return type can be anything
