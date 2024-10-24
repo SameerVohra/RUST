@@ -517,3 +517,28 @@ Cargo is a `package manager` in rust, which means we can use it to bring package
 
 - You can add external `crates` into your code using `cargo add crate_name`.
 - Crates are like `npm packages`
+
+## Vectors in RUST
+
+```rust
+fn main(){
+  let mut vec1 = Vec::new();
+  vec1.push(1);
+  vec1.push(2);
+  vec1.push(3);
+
+  println!("{}", vec1);
+}
+```
+You can simply write `vector_name.remove(index)` to remove a value at a particular index.
+
+> Initializing a Vector using macros in Rust
+
+```rust
+fn main(){
+  let numbers = vec![1,2,3,4];
+  for num in numbers{
+    print!("{}", num);
+  }
+}
+```

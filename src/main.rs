@@ -187,6 +187,16 @@ fn main(){
     println!("Formatted UTC time is: {}", Utc::now().format("%y-%m-%d %H:%M:%S"));
     println!("Current Local time is: {}", Local::now());
     println!("Current Formatted Local time is: {}", Local::now().format("%y/%m/%d %H:%M:%S"));
+
+
+    print!("\n");
+
+    let mut vec1 = Vec::new();
+    vec1.push(1);
+    vec1.push(2);
+    vec1.push(3);
+
+    println!("{:?}", vec1);
 }
 
 // Defining a function with a return type in rust, return type can be anything
