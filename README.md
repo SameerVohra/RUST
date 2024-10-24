@@ -368,7 +368,11 @@ fn main(){
   };
   println!("{} is {} years old", user.name, user.age);
 }
+
 ```
+
+> while implementing `structs` `self` is same as `this` is OOPs
+
 
 ### Data Storage of Structs in Stack And Heap
 ![image](./DataStorageStructs.png "Data Storage in structs")
